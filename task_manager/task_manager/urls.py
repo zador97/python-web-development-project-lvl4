@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 
-from task_manager.views import *
+from task_manager.task_manager.views import *
 
 
 urlpatterns = [
