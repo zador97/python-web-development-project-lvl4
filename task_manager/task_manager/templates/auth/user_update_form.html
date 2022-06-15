@@ -1,0 +1,64 @@
+{% extends "task_manager/layout.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  {% load bootstrap4 %}
+
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery='full' %}
+    <style>
+      .content-form-signin {
+        height: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+       }
+       .form-signin {
+        width: 100%;
+        max-width: 600px;
+        padding: 15px;
+        margin: auto;
+      }
+      .padding_20 {
+        padding-bottom: 20px;
+      }
+     </style>
+    <div class="content-form-signin">
+    <form class="form-signin" method="post">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">{% trans 'UpdateUser' %}</h1>
+
+        {% bootstrap_form_errors form %}
+
+        {% bootstrap_label form.first_name.errors %}
+        {% bootstrap_label _("Firstname") label_for=form.first_name.id_for_label %}
+        {% bootstrap_field form.first_name placeholder=_("Firstname") show_label=False %}
+
+        {% bootstrap_label form.last_name.errors %}
+        {% bootstrap_label _("Lastname") label_for=form.last_name.id_for_label %}
+        {% bootstrap_field form.last_name placeholder=_("Lastname") show_label=False %}
+
+         {% bootstrap_label form.username.errors %}
+        {% bootstrap_label _("Username") label_for=form.username.id_for_label %}
+        {% bootstrap_field form.username placeholder=_("Username") show_label=False %}
+        <small class="form-text text-muted padding_20">{% trans "Username_max_symbol" %}</small>
+
+        {% bootstrap_label form.password.errors %}
+        {% bootstrap_label _("Password") label_for=form.password.id_for_label %}
+        {% bootstrap_field form.password1 placeholder=_("Password") show_label=False %}
+        <small class="form-text text-muted padding_20"><ul><li>{% trans "Password_message" %}</li></ul></small>
+
+        {% bootstrap_label form.password.errors %}
+        {% bootstrap_label _("Password") label_for=form.password.id_for_label %}
+        {% bootstrap_field form.password2 placeholder=_("Password_repeat") show_label=False %}
+        <small class="form-text text-muted padding_20">{% trans "Password_repeat_message" %}</small>
+
+        {% bootstrap_button _("UpdateUserBtn") button_type="submit" button_class="btn btn-lg btn-primary btn-block" %}
+      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    </form>
+  </div>
+{% endblock %}

@@ -25,9 +25,6 @@
       padding: 15px;
       margin: auto;
     }
-    .form-signin .checkbox {
-      font-weight: 400;
-    }
     .form-signin .form-control {
       position: relative;
       box-sizing: border-box;
@@ -51,21 +48,23 @@
   </style>
 
   <div class="content-form-signin">
-    <form class="form-signin">
+    <form class="form-signin" method="post">
       {% csrf_token %}
       <h1 class="h3 mb-3 font-weight-normal">{% trans 'Please sign in' %}</h1>
-      <label for="inputEmail" class="sr-only">{% trans 'Email address' %}</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="{% trans 'Email address' %}" required autofocus>
-      <label for="inputPassword" class="sr-only">{% trans 'Password' %}</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="{% trans 'Password' %}" required>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> {% trans 'Remember me' %}
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'Sign in' %}</button>
+
+      {% bootstrap_form_errors form %}
+
+      {% bootstrap_label form.username.errors %}
+      {% bootstrap_label _("Email address") label_for=form.username.id_for_label %}
+      {% bootstrap_field form.username placeholder=_("Email address") show_label=False%}
+
+      {% bootstrap_label form.password.errors %}
+      {% bootstrap_label _("Password") label_for=form.password.id_for_label %}
+      {% bootstrap_field form.password placeholder=_("Password") show_label=False%}
+
+      {% bootstrap_button _("Sign in") button_type="submit" button_class="btn btn-lg btn-primary btn-block" %}
+
       <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
     </form>
-</div>
-
+  </div>
 {% endblock %}

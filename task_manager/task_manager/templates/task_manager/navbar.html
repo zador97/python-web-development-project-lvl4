@@ -1,0 +1,28 @@
+{% block navbar %}
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">Task manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        {% for tab in tabs %}
+          {% if tab.position == 'left' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ tab.url }}">{{ tab.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <ul class="navbar-nav">
+        {% for tab in tabs %}
+          {% if tab.position == 'right' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ tab.url }}">{{ tab.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+{% endblock %}

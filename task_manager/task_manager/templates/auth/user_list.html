@@ -1,0 +1,40 @@
+{% extends "task_manager/layout.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  {% load bootstrap4 %}
+
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery='full' %}
+
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% trans 'Users'%}</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{% trans 'ID'%}</th>
+          <th>{% trans 'user_name'%}</th>
+          <th>{% trans 'fullname'%}</th>
+          <th>{% trans 'date_create'%}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users_list %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.date_joined|date:'d.m.Y H:i' }}</td>
+            <td>
+              <a href="/users/{{ user.id }}/update/">Изменить</a>
+              <br>
+              <a href="/users/{{ user.id }}/delete/">Удалить</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
